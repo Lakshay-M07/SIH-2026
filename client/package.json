@@ -1,0 +1,10 @@
+{
+  "name": "sih26162-client",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  }
+}

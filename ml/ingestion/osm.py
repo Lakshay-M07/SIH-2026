@@ -1,0 +1,1 @@
+"""OpenStreetMap / Overpass ingestion placeholder."""
