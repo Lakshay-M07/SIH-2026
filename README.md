@@ -21,9 +21,7 @@ The primary classifier is tabular (XGBoost / LightGBM). Satellite imagery is an 
 - `scripts/` — automation and validation scripts
 - `docs/` — project documentation
 
-## Scope
-
-Core classification target:
+## Core Classification
 
 - `0` — Natural / vegetation fire
 - `1` — Industrial fire

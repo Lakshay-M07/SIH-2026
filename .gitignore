@@ -25,10 +25,10 @@ build/
 *.parquet
 *.pt
 *.pth
-*.csv
 
-# Keep required demo assets tracked
+# Keep required demo assets and provenance tracked
 !ml/data/images/demo_chips/
+!label_provenance.csv
 
 # Logs
 *.log
