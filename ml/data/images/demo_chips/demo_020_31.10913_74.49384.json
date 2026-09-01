@@ -1,0 +1,20 @@
+{
+  "demo_id": 10,
+  "chip": "demo_020_31.10913_74.49384.tif",
+  "firms": {
+    "latitude": 31.10913,
+    "longitude": 74.49384,
+    "acq_date": "2026-08-30",
+    "acq_time": 835,
+    "satellite": "N",
+    "instrument": "VIIRS",
+    "confidence": "n",
+    "frp": 9.69
+  },
+  "sentinel": {
+    "scene_id": "S2B_43RDQ_20260829_0_L2A",
+    "acquisition_datetime": "2026-08-29T05:50:22.750000+00:00",
+    "cloud_cover": 9.527583
+  },
+  "source": "NASA FIRMS + Earth Search Sentinel-2 L2A COG"
+}
