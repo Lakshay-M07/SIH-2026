@@ -5,9 +5,16 @@ import path from "node:path";
 /**
  * DataAccessService - Day 2 Data Access Stub
  *
- * Provides a single data-access boundary for the backend.
- * On Day 2: reads the row count from the staged mock Parquet fixture.
- * On Day 6+: this function boundary will be swapped for Firestore queries.
+ * ⚠️  TEMPORARY — Day 2 smoke-test only. NOT for production use.
+ *
+ * Purpose: proves the backend can touch the ML data layer during early integration.
+ * This file should be replaced or deleted before Day 6, when real Firestore
+ * queries are wired through `server/src/services/fire.service.js`.
+ *
+ * Known limitations:
+ *  - execFileSync is synchronous and blocks the Node.js event loop.
+ *  - Path resolution is heuristic and environment-specific.
+ *  - Fallback return value of 3 is a hardcoded fixture count.
  */
 
 function resolveMockParquetPath() {
