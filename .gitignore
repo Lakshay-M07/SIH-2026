@@ -28,6 +28,8 @@ build/
 
 # Keep required demo assets and provenance tracked
 !ml/data/images/demo_chips/
+!ml/preprocessing/fixtures/
+!ml/preprocessing/fixtures/*.parquet
 !label_provenance.csv
 
 # Logs
