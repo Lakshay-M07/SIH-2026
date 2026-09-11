@@ -1,0 +1,22 @@
+{
+  "chip": "test_sentinel_multispectral.tif",
+  "latitude": 29.785,
+  "longitude": 72.265,
+  "sentinel_scene": "S2B_43RBN_20260822_0_L2A",
+  "acquisition_datetime": "2026-08-22T06:00:53.993000+00:00",
+  "cloud_cover": 0,
+  "source": "Earth Search Sentinel-2 L2A COG",
+  "bands": [
+    "B02",
+    "B03",
+    "B04",
+    "B08",
+    "B11",
+    "B12",
+    "SCL"
+  ],
+  "chip_size": [
+    224,
+    224
+  ]
+}

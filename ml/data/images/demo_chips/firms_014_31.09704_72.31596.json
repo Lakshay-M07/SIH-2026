@@ -1,0 +1,29 @@
+{
+  "chip": "firms_014_31.09704_72.31596.tif",
+  "firms_row": 13,
+  "latitude": 31.09704,
+  "longitude": 72.31596,
+  "firms_date": "2026-08-25",
+  "firms_acq_time": "828",
+  "firms_satellite": "N",
+  "firms_instrument": "VIIRS",
+  "firms_confidence": "l",
+  "firms_frp": 3.38,
+  "sentinel_scene": "S2A_43RBQ_20260829_1_L2A",
+  "sentinel_datetime": "2026-08-29T06:00:45.037000+00:00",
+  "sentinel_cloud_cover": 0.150348,
+  "bands": [
+    "B02",
+    "B03",
+    "B04",
+    "B08",
+    "B11",
+    "B12",
+    "SCL"
+  ],
+  "chip_size": [
+    224,
+    224
+  ],
+  "source": "Earth Search Sentinel-2 L2A COG"
+}

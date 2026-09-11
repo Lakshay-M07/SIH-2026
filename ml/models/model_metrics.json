@@ -1,0 +1,95 @@
+{
+  "training_samples": 72,
+  "stage1_xgboost": {
+    "model": "XGBClassifier",
+    "classes": [
+      "industrial_associated",
+      "natural_vegetation",
+      "uncertain"
+    ],
+    "accuracy": 1.0,
+    "f1_score": 1.0,
+    "feature_importance_top5": [
+      [
+        "confidence_num",
+        0.13847744464874268
+      ],
+      [
+        "bright_ti4",
+        0.1106545701622963
+      ],
+      [
+        "thermal_intensity_index",
+        0.10866572707891464
+      ],
+      [
+        "is_day",
+        0.09862188249826431
+      ],
+      [
+        "delta_bt",
+        0.08284459263086319
+      ]
+    ]
+  },
+  "stage2_lightgbm": {
+    "model": "LGBMClassifier",
+    "classes": [
+      "persistent_expected",
+      "new_abnormal",
+      "insufficient_history"
+    ],
+    "accuracy": 1.0,
+    "f1_score": 1.0,
+    "feature_importance_top5": [
+      [
+        "min_neighbor_dist_km",
+        105.0
+      ],
+      [
+        "delta_bt",
+        96.0
+      ],
+      [
+        "bright_ti5",
+        92.0
+      ],
+      [
+        "spatial_density_15km",
+        83.0
+      ],
+      [
+        "bright_ti4",
+        61.0
+      ]
+    ]
+  },
+  "regression_persistence": {
+    "model": "Ridge",
+    "r2_score": 0.6021569967269897,
+    "mae": 0.08822286128997803
+  },
+  "baseline_logistic_regression": {
+    "model": "LogisticRegression",
+    "accuracy": 0.8888888888888888
+  },
+  "features": [
+    "latitude",
+    "longitude",
+    "bright_ti4",
+    "bright_ti5",
+    "delta_bt",
+    "bt_ratio",
+    "frp_clean",
+    "log_frp",
+    "scan",
+    "track",
+    "pixel_area",
+    "confidence_num",
+    "is_day",
+    "hour",
+    "spatial_density_15km",
+    "min_neighbor_dist_km",
+    "thermal_intensity_index"
+  ]
+}
