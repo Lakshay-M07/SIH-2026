@@ -1,0 +1,33 @@
+{
+  "demo_id": 12,
+  "chip": "final_002_30.35123_73.65195.tif",
+  "firms": {
+    "latitude": 30.35123,
+    "longitude": 73.65195,
+    "acq_date": "2026-08-30",
+    "acq_time": 835,
+    "satellite": "VIIRS_SNPP_NRT",
+    "instrument": "VIIRS",
+    "confidence": "n",
+    "frp": 1.82
+  },
+  "sentinel": {
+    "scene_id": "S2B_43RCP_20260822_0_L2A",
+    "acquisition_datetime": "2026-08-22T06:00:35.444000+00:00",
+    "cloud_cover": 0.004113
+  },
+  "bands": [
+    "B02",
+    "B03",
+    "B04",
+    "B08",
+    "B11",
+    "B12",
+    "SCL"
+  ],
+  "chip_size": [
+    224,
+    224
+  ],
+  "source": "NASA FIRMS + Earth Search Sentinel-2 L2A COG"
+}
