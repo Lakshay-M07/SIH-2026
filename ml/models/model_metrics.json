@@ -1,4 +1,6 @@
 {
+  "evaluation_protocol": "5-Fold Stratified Cross-Validation (Out-Of-Fold)",
+  "label_methodology": "Domain-calibrated expert heuristic pseudo-labels based on VIIRS physical dynamics, OSM infrastructure proximity, and temporal cluster recurrence.",
   "training_samples": 72,
   "stage1_xgboost": {
     "model": "XGBClassifier",
@@ -7,28 +9,47 @@
       "natural_vegetation",
       "uncertain"
     ],
-    "accuracy": 1.0,
-    "f1_score": 1.0,
+    "oof_cv_accuracy": 0.8472,
+    "oof_cv_f1_score": 0.8259,
+    "oof_cv_precision": 0.8341,
+    "oof_cv_recall": 0.8472,
+    "confusion_matrix": [
+      [
+        2,
+        3,
+        0
+      ],
+      [
+        1,
+        56,
+        1
+      ],
+      [
+        0,
+        6,
+        3
+      ]
+    ],
     "feature_importance_top5": [
       [
         "confidence_num",
-        0.13847744464874268
+        0.13861443102359772
       ],
       [
-        "bright_ti4",
-        0.1106545701622963
+        "frp_clean",
+        0.12031427025794983
       ],
       [
         "thermal_intensity_index",
-        0.10866572707891464
+        0.1182645633816719
       ],
       [
-        "is_day",
-        0.09862188249826431
+        "log_frp",
+        0.08764062076807022
       ],
       [
-        "delta_bt",
-        0.08284459263086319
+        "bt_ratio",
+        0.08245743811130524
       ]
     ]
   },
@@ -39,39 +60,51 @@
       "new_abnormal",
       "insufficient_history"
     ],
-    "accuracy": 1.0,
-    "f1_score": 1.0,
-    "feature_importance_top5": [
+    "oof_cv_accuracy": 0.9444,
+    "oof_cv_f1_score": 0.9411,
+    "oof_cv_precision": 0.9481,
+    "oof_cv_recall": 0.9444,
+    "confusion_matrix": [
       [
-        "min_neighbor_dist_km",
-        105.0
+        11,
+        4
       ],
       [
-        "delta_bt",
-        96.0
+        0,
+        57
+      ]
+    ],
+    "feature_importance_top5": [
+      [
+        "persistence_index",
+        87.0
+      ],
+      [
+        "latitude",
+        63.0
+      ],
+      [
+        "dist_industrial_m",
+        48.0
       ],
       [
         "bright_ti5",
-        92.0
+        45.0
       ],
       [
-        "spatial_density_15km",
-        83.0
-      ],
-      [
-        "bright_ti4",
-        61.0
+        "frp_clean",
+        36.0
       ]
     ]
   },
   "regression_persistence": {
     "model": "Ridge",
-    "r2_score": 0.6021569967269897,
-    "mae": 0.08822286128997803
+    "oof_cv_r2_score": 0.6891,
+    "oof_cv_mae": 0.024
   },
   "baseline_logistic_regression": {
     "model": "LogisticRegression",
-    "accuracy": 0.8888888888888888
+    "oof_cv_accuracy": 0.875
   },
   "features": [
     "latitude",
@@ -90,6 +123,11 @@
     "hour",
     "spatial_density_15km",
     "min_neighbor_dist_km",
-    "thermal_intensity_index"
+    "temporal_pass_count",
+    "cluster_time_span_days",
+    "nocturnal_fraction",
+    "dist_industrial_m",
+    "thermal_intensity_index",
+    "persistence_index"
   ]
 }

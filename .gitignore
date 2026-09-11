@@ -19,12 +19,14 @@ build/
 .vscode/
 .idea/
 
-# Generated data and model artifacts
+# Generated data and model artifacts (whitelist SIH demo models)
 *.pkl
 *.joblib
 *.parquet
 *.pt
 *.pth
+!ml/models/*.joblib
+!ml/models/*.json
 
 # Keep required demo assets and provenance tracked
 !ml/data/images/demo_chips/

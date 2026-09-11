@@ -46,12 +46,19 @@ class FirmsIngestService {
   }
 
   getStatus() {
+    const mapKey = process.env.FIRMS_MAP_KEY;
+    const isLive = Boolean(mapKey);
     return {
-      has_firms_key: Boolean(process.env.FIRMS_MAP_KEY),
+      mode: isLive ? "LIVE_NASA_API" : "DEMO_SIMULATION",
+      is_simulated: !isLive,
+      has_firms_key: isLive,
       interval_hours: 3,
       last_run: this.lastRun,
       next_run: this.nextRun,
       source: this.lastSource,
+      message: isLive
+        ? "Connected directly to NASA FIRMS Near-Real-Time REST API."
+        : "Running in DEMO_SIMULATION mode. Add FIRMS_MAP_KEY to .env to query NASA servers directly.",
       history: this.history.slice(0, 10),
     };
   }
@@ -68,31 +75,33 @@ class FirmsIngestService {
         const rawCsv = await this.fetchNasaFirmsCsv(mapKey);
         const parsed = this.parseFirmsCsv(rawCsv);
         if (parsed.length > 0) {
-          const added = dataService.ingestObservations(parsed, "NASA FIRMS Live API");
+          const added = dataService.ingestObservations(parsed, "NASA FIRMS Live API", false);
           this.lastSource = "NASA FIRMS Live API";
-          this.recordRun(added.length, "NASA FIRMS Live API");
-          return { count: added.length, source: "NASA FIRMS Live API" };
+          this.recordRun(added.length, "NASA FIRMS Live API", false);
+          return { count: added.length, source: "NASA FIRMS Live API", mode: "LIVE_NASA_API" };
         }
       } catch (err) {
-        console.warn(`[FirmsIngestService] NASA API error (${err.message}), falling back to live satellite pass.`);
+        console.warn(`[FirmsIngestService] NASA API error (${err.message}), falling back to transparent demo simulation.`);
       }
     }
 
-    // Live 3-hour satellite orbital pass simulation (Suomi-NPP / NOAA-20 375m pass over South Asia)
-    console.log("[FirmsIngestService] Ingesting latest 3-hour NRT satellite pass detections over India...");
+    // Transparent Demo Simulation when no NASA key is provided
+    console.log("[FirmsIngestService] Ingesting 3-hour demo satellite pass (DEMO_SIMULATION mode)...");
     const simulatedDetections = this.generateOrbitalPassDetections(now);
-    const added = dataService.ingestObservations(simulatedDetections, "Live NRT Satellite Pass");
-    this.lastSource = "Live NRT Satellite Pass";
-    this.recordRun(added.length, "Live NRT Satellite Pass");
+    const sourceLabel = "DEMO_SIMULATION (NASA API Key Not Configured)";
+    const added = dataService.ingestObservations(simulatedDetections, sourceLabel, true);
+    this.lastSource = sourceLabel;
+    this.recordRun(added.length, sourceLabel, true);
 
-    return { count: added.length, source: "Live NRT Satellite Pass" };
+    return { count: added.length, source: sourceLabel, mode: "DEMO_SIMULATION" };
   }
 
-  recordRun(count, source) {
+  recordRun(count, source, isSimulated = false) {
     this.history.unshift({
       timestamp: new Date().toISOString(),
       count,
       source,
+      is_simulated: isSimulated,
     });
     if (this.history.length > 50) this.history.pop();
   }

@@ -25,6 +25,32 @@ MODELS_DIR = PROJECT_ROOT / "ml" / "models"
 STAGE1_CLASSES = ["industrial_associated", "natural_vegetation", "uncertain"]
 STAGE2_CLASSES = ["persistent_expected", "new_abnormal", "insufficient_history"]
 
+# Reference industrial anchor coordinates across Northern/Western India
+INDUSTRIAL_ANCHORS = [
+    (30.9010, 75.8573, "Ludhiana Heavy Industrial Complex"),
+    (30.2110, 74.9455, "Bathinda Thermal Power Complex"),
+    (31.3260, 75.5762, "Jalandhar Manufacturing Cluster"),
+    (29.6857, 76.9905, "Karnal Energy & Processing Belt"),
+    (21.1702, 74.7796, "Dhule Industrial & Highway Corridor"),
+    (29.9695, 76.8783, "Kurukshetra Agro-Industrial Hub"),
+    (28.3949, 70.3340, "Border Region Logistics Zone"),
+]
+
+
+def haversine(lat1, lon1, lat2, lon2):
+    """Haversine distance in kilometers."""
+    r = 6371.0
+    phi1 = np.radians(lat1)
+    phi2 = np.radians(lat2)
+    delta_phi = np.radians(lat2 - lat1)
+    delta_lambda = np.radians(lon2 - lon1)
+    a = (
+        np.sin(delta_phi / 2.0) ** 2
+        + np.cos(phi1) * np.cos(phi2) * np.sin(delta_lambda / 2.0) ** 2
+    )
+    return r * 2 * np.arctan2(np.sqrt(a), np.sqrt(1.0 - a))
+
+
 FEATURE_COLUMNS = [
     "latitude",
     "longitude",
@@ -42,7 +68,12 @@ FEATURE_COLUMNS = [
     "hour",
     "spatial_density_15km",
     "min_neighbor_dist_km",
+    "temporal_pass_count",
+    "cluster_time_span_days",
+    "nocturnal_fraction",
+    "dist_industrial_m",
     "thermal_intensity_index",
+    "persistence_index",
 ]
 
 _MODELS = {}
@@ -106,7 +137,23 @@ def _extract_features(records: list[dict]) -> np.ndarray:
         density = float(r.get("spatial_density_15km", 2.0))
         min_dist = float(r.get("min_neighbor_dist_km", 5.0))
 
-        thermal_idx = (delta_bt / 30.0) * 0.4 + log_frp * 0.35 + conf_num * 0.25
+        # Temporal features
+        temporal_pass_count = float(r.get("temporal_pass_count", 2.0))
+        cluster_time_span_days = float(r.get("cluster_time_span_days", 1.0))
+        nocturnal_fraction = float(r.get("nocturnal_fraction", 0.0 if is_day == 1.0 else 1.0))
+
+        # Industrial anchor distance
+        dist_ind_m = float(r.get("dist_industrial_m", min([
+            haversine(lat, lon, a_lat, a_lon) * 1000.0 for a_lat, a_lon, _ in INDUSTRIAL_ANCHORS
+        ])))
+
+        thermal_idx = (delta_bt / 30.0) * 0.40 + log_frp * 0.35 + conf_num * 0.25
+        persistence_idx = (
+            min(1.0, temporal_pass_count / 5.0) * 0.45
+            + min(1.0, cluster_time_span_days / 7.0) * 0.25
+            + nocturnal_fraction * 0.20
+            + (1.0 if conf_num >= 0.7 else 0.0) * 0.10
+        )
 
         X[i] = [
             lat,
@@ -125,7 +172,12 @@ def _extract_features(records: list[dict]) -> np.ndarray:
             hour,
             density,
             min_dist,
+            temporal_pass_count,
+            cluster_time_span_days,
+            nocturnal_fraction,
+            dist_ind_m,
             thermal_idx,
+            persistence_idx,
         ]
 
     return X

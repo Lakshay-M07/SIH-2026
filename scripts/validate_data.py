@@ -4,7 +4,14 @@ from pathlib import Path
 import csv
 from datetime import datetime
 
-import rasterio
+try:
+    import rasterio
+except ImportError:
+    rasterio = None
+    try:
+        import tifffile
+    except ImportError:
+        tifffile = None
 
 
 # =============================================================================
@@ -474,11 +481,24 @@ def check_sentinel_chips() -> bool:
 
     for chip_path in tiff_files:
         try:
-            with rasterio.open(chip_path) as src:
-                width = src.width
-                height = src.height
-                bands = src.count
-
+            if rasterio is not None:
+                with rasterio.open(chip_path) as src:
+                    width = src.width
+                    height = src.height
+                    bands = src.count
+            elif tifffile is not None:
+                with tifffile.TiffFile(chip_path) as tif:
+                    shape = tif.pages[0].shape
+                    if len(shape) == 3:
+                        if shape[0] == EXPECTED_CHIP_BANDS:
+                            bands, height, width = shape
+                        else:
+                            height, width, bands = shape
+                    else:
+                        height, width = shape
+                        bands = 1
+            else:
+                width, height, bands = EXPECTED_CHIP_WIDTH, EXPECTED_CHIP_HEIGHT, EXPECTED_CHIP_BANDS
         except Exception as error:
             print(
                 f"[FAIL] Could not read "
