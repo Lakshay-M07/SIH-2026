@@ -18,13 +18,17 @@ Anti-Leakage Rule (Roadmap Page 6, 8, 13):
 These OSM infrastructure distances are strictly MODEL INPUTS, never target labels.
 """
 
+import json
 from pathlib import Path
 import sys
 import argparse
 import numpy as np
 import pandas as pd
-import geopandas as gpd
-from shapely.geometry import Point
+
+try:
+    import geopandas as gpd
+except ImportError:
+    gpd = None
 
 # The 6 locked feature column names for Day 6 feature engineering contract
 OSM_DISTANCE_COLUMNS = [
@@ -100,7 +104,22 @@ def attach_osm_distance_features(hotspot_df, facility_gdf=None):
                 f"This file is produced by Person A's OSM ingestion pipeline (ml/ingestion/osm.py) "
                 f"and deposited by Person C into ml/data/external/ (expected Day 5)."
             )
-        facility_gdf = gpd.read_file(DEFAULT_OSM_PATH)
+        if gpd is not None:
+            facility_gdf = gpd.read_file(DEFAULT_OSM_PATH)
+        else:
+            with open(DEFAULT_OSM_PATH, "r", encoding="utf-8") as f:
+                geojson_data = json.load(f)
+            rows = []
+            for feat in geojson_data.get("features", []):
+                coords = feat.get("geometry", {}).get("coordinates", [0, 0])
+                props = feat.get("properties", {})
+                rows.append({
+                    "name": props.get("name", ""),
+                    "facility_type": props.get("facility_type", ""),
+                    "latitude": coords[1],
+                    "longitude": coords[0],
+                })
+            facility_gdf = pd.DataFrame(rows)
 
     # Ensure latitude and longitude columns exist
     df = hotspot_df.copy()

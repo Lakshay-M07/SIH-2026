@@ -43,6 +43,9 @@ from sklearn.preprocessing import StandardScaler
 import xgboost as xgb
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+import sys
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 DATA_DIR = PROJECT_ROOT / "ml" / "data"
 MODELS_DIR = PROJECT_ROOT / "ml" / "models"
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
@@ -204,6 +207,14 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     # Spatiotemporal features (Temporal clustering + OSM infrastructure proximity)
     df = build_spatiotemporal_features(df)
 
+    # Attach real OpenStreetMap infrastructure distances (Addresses Issues #9, #10)
+    try:
+        from ml.preprocessing.spatial_join import attach_osm_distance_features
+        df = attach_osm_distance_features(df)
+        df["dist_industrial_m"] = df["distance_to_industrial_area"]
+    except Exception as exc:
+        print(f"OSM distance feature attachment note: {exc}")
+
     # Thermal Intensity Index (composite physical metric)
     df["thermal_intensity_index"] = (
         (df["delta_bt"] / 30.0) * 0.40
@@ -345,17 +356,16 @@ def train_models():
     oof_pers_preds = np.zeros(n_samples, dtype=np.float32)
     oof_lr_preds = np.zeros(n_samples, dtype=int)
 
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
-
-    print(f"\n--- Running {n_splits}-Fold Stratified Cross-Validation ---")
+    print(f"\n--- Running {n_splits}-Fold Stratified Cross-Validation (Leakage-Free) ---")
     fold = 1
     for train_idx, val_idx in skf.split(X, y_stage1):
         X_tr, y1_tr, y2_tr, yp_tr = X[train_idx], y_stage1[train_idx], y_stage2[train_idx], y_pers[train_idx]
         X_val, y1_val = X[val_idx], y_stage1[val_idx]
 
-        X_tr_sc = X_scaled[train_idx]
-        X_val_sc = X_scaled[val_idx]
+        # Strictly fold-isolated scaling: fit ONLY on training slice, transform validation slice (Addresses Problem #5)
+        fold_scaler = StandardScaler()
+        X_tr_sc = fold_scaler.fit_transform(X_tr)
+        X_val_sc = fold_scaler.transform(X_val)
 
         # Fold XGBoost
         fold_xgb = xgb.XGBClassifier(
@@ -428,11 +438,14 @@ def train_models():
     )
     final_lgb.fit(X, y_stage2)
 
+    final_scaler = StandardScaler()
+    X_scaled_final = final_scaler.fit_transform(X)
+
     final_ridge = Ridge(alpha=1.0, random_state=42)
-    final_ridge.fit(X_scaled, y_pers)
+    final_ridge.fit(X_scaled_final, y_pers)
 
     final_logreg = LogisticRegression(max_iter=2000, random_state=42)
-    final_logreg.fit(X_scaled, y_stage1)
+    final_logreg.fit(X_scaled_final, y_stage1)
 
     # Feature Importances
     xgb_feat_imp = dict(zip(FEATURE_COLUMNS, [float(x) for x in final_xgb.feature_importances_]))
@@ -480,7 +493,7 @@ def train_models():
     joblib.dump(final_lgb, MODELS_DIR / "stage2_lightgbm.joblib")
     joblib.dump(final_ridge, MODELS_DIR / "persistence_ridge_regression.joblib")
     joblib.dump(final_logreg, MODELS_DIR / "baseline_logistic_regression.joblib")
-    joblib.dump(scaler, MODELS_DIR / "scaler.joblib")
+    joblib.dump(final_scaler, MODELS_DIR / "scaler.joblib")
 
     with open(MODELS_DIR / "model_metrics.json", "w") as f:
         json.dump(metrics, f, indent=2)

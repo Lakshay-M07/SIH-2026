@@ -1,0 +1,469 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.745,
+          20.925
+        ]
+      },
+      "properties": {
+        "name": "MIDC Avadhan Industrial Area",
+        "facility_type": "industrial_area",
+        "osm_id": 4910283,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.845,
+          21.289
+        ]
+      },
+      "properties": {
+        "name": "MIDC Nardana Industrial Estate",
+        "facility_type": "industrial_area",
+        "osm_id": 5192019,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.895,
+          30.885
+        ]
+      },
+      "properties": {
+        "name": "Ludhiana Focal Point Industrial Area",
+        "facility_type": "industrial_area",
+        "osm_id": 3810291,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.965,
+          30.235
+        ]
+      },
+      "properties": {
+        "name": "Bathinda Industrial Growth Centre",
+        "facility_type": "industrial_area",
+        "osm_id": 3918203,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.545,
+          31.345
+        ]
+      },
+      "properties": {
+        "name": "Jalandhar Leather & Surgical Complex",
+        "facility_type": "industrial_area",
+        "osm_id": 4018291,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.995,
+          29.412
+        ]
+      },
+      "properties": {
+        "name": "Panipat Industrial Area Sector 25",
+        "facility_type": "industrial_area",
+        "osm_id": 4182901,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.585,
+          21.712
+        ]
+      },
+      "properties": {
+        "name": "Dahej Petroleum & Chemical Petrochemicals Zone (PCPIR)",
+        "facility_type": "industrial_area",
+        "osm_id": 4391029,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          72.675,
+          21.135
+        ]
+      },
+      "properties": {
+        "name": "Hazira Manufacturing & Heavy Industrial Belt",
+        "facility_type": "industrial_area",
+        "osm_id": 4481029,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.912,
+          30.228
+        ]
+      },
+      "properties": {
+        "name": "Guru Nanak Dev Thermal Power Station (Bathinda)",
+        "facility_type": "power_plant",
+        "osm_id": 1029381,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.168,
+          30.278
+        ]
+      },
+      "properties": {
+        "name": "Guru Hargobind Thermal Plant (Lehra Mohabbat)",
+        "facility_type": "power_plant",
+        "osm_id": 1029382,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.875,
+          29.395
+        ]
+      },
+      "properties": {
+        "name": "Panipat Thermal Power Station",
+        "facility_type": "power_plant",
+        "osm_id": 1029383,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.875,
+          29.362
+        ]
+      },
+      "properties": {
+        "name": "Rajiv Gandhi Thermal Power Plant (Khedar)",
+        "facility_type": "power_plant",
+        "osm_id": 1029384,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.125,
+          21.435
+        ]
+      },
+      "properties": {
+        "name": "Surat Lignite Power Plant",
+        "facility_type": "power_plant",
+        "osm_id": 1029385,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.885,
+          21.365
+        ]
+      },
+      "properties": {
+        "name": "Dhule Shirpur 150MW Solar Power Park",
+        "facility_type": "power_plant",
+        "osm_id": 1029386,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.885,
+          29.475
+        ]
+      },
+      "properties": {
+        "name": "Panipat Refinery (Indian Oil Corporation)",
+        "facility_type": "refinery",
+        "osm_id": 2019281,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.945,
+          30.035
+        ]
+      },
+      "properties": {
+        "name": "Guru Gobind Singh Refinery (HPCL-Mittal Bathinda)",
+        "facility_type": "refinery",
+        "osm_id": 2019282,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.125,
+          22.375
+        ]
+      },
+      "properties": {
+        "name": "Koyali Refinery (Indian Oil Corporation Vadodara)",
+        "facility_type": "refinery",
+        "osm_id": 2019283,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.085,
+          21.365
+        ]
+      },
+      "properties": {
+        "name": "Tadkeshwar Lignite Mine (Gujarat Mineral Dev Corp)",
+        "facility_type": "mine",
+        "osm_id": 3019281,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.215,
+          28.325
+        ]
+      },
+      "properties": {
+        "name": "Aravalli Quartzite Stone Quarry Zone",
+        "facility_type": "mine",
+        "osm_id": 3019282,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.635,
+          21.125
+        ]
+      },
+      "properties": {
+        "name": "Dhule Basalt Rock & Aggregate Quarry Belt",
+        "facility_type": "mine",
+        "osm_id": 3019283,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.775,
+          20.912
+        ]
+      },
+      "properties": {
+        "name": "Dhule Textile & Agro Cotton Ginning Complex",
+        "facility_type": "factory",
+        "osm_id": 4019281,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.385,
+          27.975
+        ]
+      },
+      "properties": {
+        "name": "Hero MotoCorp Neemrana Manufacturing Plant",
+        "facility_type": "factory",
+        "osm_id": 4019282,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.915,
+          30.912
+        ]
+      },
+      "properties": {
+        "name": "Ludhiana Vardhman Spinning & Textile Mills",
+        "facility_type": "factory",
+        "osm_id": 4019283,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.585,
+          31.325
+        ]
+      },
+      "properties": {
+        "name": "Jalandhar Apex Sports Goods Factory Complex",
+        "facility_type": "factory",
+        "osm_id": 4019284,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.795,
+          21.185
+        ]
+      },
+      "properties": {
+        "name": "National Highway 52 (Dhule - Indore Corridor)",
+        "facility_type": "major_road",
+        "osm_id": 5019281,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.785,
+          20.915
+        ]
+      },
+      "properties": {
+        "name": "National Highway 53 (Surat - Kolkata Highway)",
+        "facility_type": "major_road",
+        "osm_id": 5019282,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.855,
+          30.905
+        ]
+      },
+      "properties": {
+        "name": "National Highway 44 (GT Road Delhi - Jalandhar)",
+        "facility_type": "major_road",
+        "osm_id": 5019283,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.945,
+          30.215
+        ]
+      },
+      "properties": {
+        "name": "National Highway 7 (Bathinda - Malout Road)",
+        "facility_type": "major_road",
+        "osm_id": 5019284,
+        "source": "OpenStreetMap"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.845,
+          28.215
+        ]
+      },
+      "properties": {
+        "name": "National Highway 48 (Delhi - Jaipur - Mumbai Expressway)",
+        "facility_type": "major_road",
+        "osm_id": 5019285,
+        "source": "OpenStreetMap"
+      }
+    }
+  ]
+}
